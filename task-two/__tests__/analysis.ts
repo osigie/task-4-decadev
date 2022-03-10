@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
+
 import analysis from '../src/analysis';
 
 const fixturesInputDirectory = path.join(__dirname, '../', 'fixtures/inputs');

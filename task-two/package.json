@@ -19,7 +19,9 @@
   "dependencies": {
     "chalk": "4.1.0",
     "commander": "6.0.0",
+    "csv-parser": "3.0.0",
     "email-addresses": "3.1.0",
+    "email-validator": "2.0.4",
     "glob": "7.1.6",
     "got": "11.5.2",
     "lodash": "4.17.20",
@@ -43,7 +45,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.1.4",
     "husky": "4.2.5",
-    "jest": "26.4.0",
+    "jest": "27.5.1",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
     "typescript": "3.9.7"
