@@ -11,7 +11,7 @@ import { sample } from 'lodash';
 
 // const createReadStream = require('fs').createReadStream;
 // const createWriteStream = require('fs').createWriteStream;
-import fs from 'fs'
+import fs from 'fs';
 
 type Categories = {
   [key: string]: number;
@@ -41,7 +41,7 @@ function analyseFiles(inputPath: string[], output: string) {
     });
 
     stream.on('end', () => {
-      let realMails = data
+      const realMails = data
         .split('\n')
         .filter((data: string) => data.includes('@'));
       totalEmailsParsed += realMails.length;
@@ -62,7 +62,6 @@ function analyseFiles(inputPath: string[], output: string) {
         totalValidEmails: totalValidEmails,
         categories: categoriesObj,
       };
-
 
       // streaming to JSON file
       const writeData = JSON.stringify(result, null, 3);

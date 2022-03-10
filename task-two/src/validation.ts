@@ -14,7 +14,7 @@ function validateEmailAddresses(inputPath: string[], outputFile: string) {
 
   const validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    // looping through the input since we have input of array
+  // looping through the input since we have input of array
   inputPath.forEach((path) => {
     const stream = fs.createReadStream(path, 'UTF8');
     stream.on('data', (chunk: string) => {
