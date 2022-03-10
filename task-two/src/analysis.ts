@@ -11,7 +11,7 @@ import { sample } from 'lodash';
 
 // const createReadStream = require('fs').createReadStream;
 // const createWriteStream = require('fs').createWriteStream;
-let fs = require('fs');
+import fs from 'fs'
 
 type Categories = {
   [key: string]: number;
@@ -28,6 +28,9 @@ function analyseFiles(inputPath: string[], output: string) {
   let totalValidEmails = 0;
   const categoriesObj: Categories = {};
   const validRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  // looping through the input since we have input of array
+
   inputPath.forEach((path) => {
     const stream = fs.createReadStream(path, 'UTF8');
     stream.on('data', (chunk: string) => {
@@ -45,17 +48,23 @@ function analyseFiles(inputPath: string[], output: string) {
       const validEmails = realMails.filter((data) => data.match(validRegex));
       totalValidEmails += validEmails.length;
       const mailsWithOutAt = validEmails.map((data) => data.split('@')[1]);
-      let uniqueMails = [...new Set(mailsWithOutAt)];
+      const uniqueMails = [...new Set(mailsWithOutAt)];
+
+      // Getting the unique mails and putting the occurence as key
+
       mailsWithOutAt.forEach((data) => {
         return (categoriesObj[data] = categoriesObj[data] + 1 || 1);
       });
-      let result: Result = {
+      // Creating the actual result object
+      const result: Result = {
         'valid-domains': uniqueMails,
         totalEmailsParsed: totalEmailsParsed,
         totalValidEmails: totalValidEmails,
         categories: categoriesObj,
       };
 
+
+      // streaming to JSON file
       const writeData = JSON.stringify(result, null, 3);
       const writeStream = fs.createWriteStream(output);
       writeStream.write(writeData);
